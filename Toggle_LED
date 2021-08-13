@@ -1,0 +1,70 @@
+const int btn = 8;
+const int led1 = 9;
+const int led2 = 10;
+const int led3 = 11;
+enum fcnMode {
+ OFF,
+ LED1,
+ LED2,
+ LED3
+};
+  
+unsigned long buttonState = 0;
+int funcState = 0; 
+
+void setup() {
+ Serial.begin(9600); 
+ pinMode(btn, INPUT_PULLUP);
+ pinMode(, OUTPUT);
+ pinMode(led2, OUTPUT);
+ pinMode(led3, OUTPUT);
+}
+
+void loop() {
+ buttonPressed();
+
+}
+
+void buttonPressed() {
+  
+      Serial.print("Function : ");
+    Serial.println(funcState);
+
+  if(digitalRead(btn)){ 
+    funcState++;  
+  }
+  
+  
+  switch (funcState) {
+   case OFF:
+   digitalWrite(led1, LOW);
+   digitalWrite(led2, LOW);
+   digitalWrite(led3, LOW);
+     break;
+   case LED1:
+     Serial.print("First Light : ");
+     digitalWrite(led1, HIGH);
+     digitalWrite(led2, LOW);
+     digitalWrite(led3, LOW);
+     break;
+   case LED2:
+     Serial.print("Second Light : ");
+     digitalWrite(led2, HIGH);
+     digitalWrite(led1, LOW);
+     digitalWrite(led3, LOW);    
+     break;
+   case LED3:
+     Serial.print("3rd Light : ");
+     digitalWrite(led3, HIGH);
+    digitalWrite(led2, LOW);
+   digitalWrite(led1, LOW);
+
+     break;
+    default:
+     funcState=0;
+     break;
+ }
+  
+ 
+ delay(200);
+}
