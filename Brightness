@@ -1,37 +1,32 @@
-
-int ledPin1 = 13; 
-int inPin = 2;   
-int val = 0;    
-
-
+int ledPin1 = 11; 
+int inPin = 2;     
 int brightness1 = 0;
-
-int latch= 0;
-
-
+ 
 void setup() {
+  Serial.begin(9600);
   pinMode(ledPin1, OUTPUT);  
-  pinMode(2, INPUT);    
+  pinMode(2, INPUT);  
+  digitalWrite(2,HIGH);
 }
 
 void loop(){
   
-  analogWrite(inPin,brightness1);
-  val = digitalRead(inPin); 
+  brightness1 = constrain(brightness1, 0, 150);
+  analogWrite(ledPin1, brightness1);
+  Serial.println(brightness1);
 
- if (val == HIGH) 
-  {       
-    digitalWrite(ledPin1, LOW); 
-    brightness1= brightness1+63;
-      
-  } 
-  
-  else if (brightness1 > 255)
+
+if(digitalRead(inPin) == LOW)
+{
+brightness1+=30;
+digitalWrite(2,LOW);
+}
+  else if(brightness1== 150)
   {
     brightness1=0;
-    analogWrite(inPin,brightness1);
-    digitalWrite(ledPin1, HIGH);  
   }
   
-  
+  delay(200);  
 }
+  
+  
