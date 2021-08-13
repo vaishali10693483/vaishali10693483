@@ -39,7 +39,7 @@ void loop()
     digitalWrite(8, LOW);
     digitalWrite(0, LOW);
     delay(1000);
-    Serial.println(" mid C");
+    Serial.println(" low C");
     
   }
   else
@@ -48,7 +48,7 @@ void loop()
      digitalWrite(8, LOW);
     digitalWrite(2, LOW);
     delay(1000);
-    Serial.println(" low C");
+    Serial.println(" mid C");
   }
     
     
