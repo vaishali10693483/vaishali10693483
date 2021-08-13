@@ -1,0 +1,37 @@
+
+int ledPin1 = 13; 
+int inPin = 2;   
+int val = 0;    
+
+
+int brightness1 = 0;
+
+int latch= 0;
+
+
+void setup() {
+  pinMode(ledPin1, OUTPUT);  
+  pinMode(2, INPUT);    
+}
+
+void loop(){
+  
+  analogWrite(inPin,brightness1);
+  val = digitalRead(inPin); 
+
+ if (val == HIGH) 
+  {       
+    digitalWrite(ledPin1, LOW); 
+    brightness1= brightness1+63;
+      
+  } 
+  
+  else if (brightness1 > 255)
+  {
+    brightness1=0;
+    analogWrite(inPin,brightness1);
+    digitalWrite(ledPin1, HIGH);  
+  }
+  
+  
+}
