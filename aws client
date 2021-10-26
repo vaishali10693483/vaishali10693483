@@ -1,0 +1,28 @@
+import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
+import time
+import string
+#ser = serial.Serial("/dev/rfcomm0", 9600)
+#ser.write(str.encode('Start\r\n'))
+def on_connect(client, userdata, flags, rc): # func for making connection
+ print("Connected to MQTT")
+ print("Connection returned result: " + str(rc) )
+ client.subscribe("ULTRASONIC")
+
+
+def on_message(client, userdata, msg): # Func for Sending msg
+
+ print(msg.topic+" "+str(msg.payload))
+ print(str(msg.payload))
+ if int(msg.payload) <= 15 and int(msg.payload) != 0:
+  print("Buzzer on")
+  publish.single("RP", "1", hostname="localhost")
+  print("done on")
+ else: 
+  publish.single("RP", "0", hostname="localhost")
+  print("done off")
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
+client.connect("54.165.184.16", 1883, 60)
+client.loop_forever()
